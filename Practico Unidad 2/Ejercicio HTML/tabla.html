@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla</title>
+    <style>
+        table {
+            border: 1px solid #000;
+        }
+        th, td {
+            width: 25%;
+            text-align: left;
+            vertical-align: top;
+            border: 1px solid #000;
+
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="texto.html">Texto</a></li>
+                <li><a href="tabla.html">Tabla</a></li>
+                <li><a href="multimedia.html">Multimedia</a></li>
+                <li><a href="formulario.html">Formulario</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <table>
+            <caption>Contenido del Libro</caption>
+            <thead>
+                <tr>
+                    <th colspan="3">Capítulos del Libro</th>
+                </tr>
+                <tr>
+                    <th>Capítulo</th>
+                    <th>Títulos del Capítulo</th>
+                    <th>Páginas</th>
+                </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td rowspan="2">1</td>
+                  <td>Introducción</td>
+                  <td>1-5</td>
+               </tr>
+               <tr>
+                  <td>Primeros Pasos</td>
+                  <td>6-12</td>
+               </tr>
+               <tr>
+                  <td rowspan="3">2</td>
+                  <td>Conceptos Básicos</td>
+                  <td>13-20</td>
+               </tr>
+               <tr>
+                  <td>Avanzado</td>
+                  <td>21-35</td>
+               </tr>
+               <tr>
+                  <td>Ejemplos Prácticos</td>
+                  <td>36-45</td>
+               </tr>
+               <tr>
+                  <td>3</td>
+                  <td>Conclusiones</td>
+                  <td>46-50</td>
+               </tr>
+               
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

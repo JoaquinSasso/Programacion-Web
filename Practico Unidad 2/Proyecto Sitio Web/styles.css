@@ -1,0 +1,83 @@
+h1, h2, h3, h4, h5, h6 {
+   font-family: 'Roboto', sans-serif;
+}
+p, a, li {
+   font-family: 'Poppins', sans-serif;
+}
+.contact-info {
+   background-color: #f8f9fa;
+   padding: 20px;
+   border-radius: 5px;
+}
+.social-icons a {
+   color: #0024f0;
+   margin-right: 15px;
+   font-size: 1.5rem;
+   transition: color 0.3s;
+}
+.social-icons a:hover {
+   color: black;
+}
+.btn {
+   background-color: #0024f0;
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   border-radius: 5px;
+   text-decoration: none;
+   transition: background-color 0.3s;
+}
+.btn:hover {
+   background-color: #a5d8ff;
+}
+.social-icons a {
+   color: white;
+   margin-right: 15px;
+   font-size: 1.5rem;
+   transition: color 0.3s;
+}
+.social-icons a:hover {
+   color: #00aced;
+}
+.carousel-container {
+   width: 80%;
+   height: 40vh;
+   margin: 0 auto;
+   position: relative;
+}
+.carousel-img {
+   height: 40vh;
+   object-fit: cover;
+   opacity: 0.6;
+   filter: blur(1px);
+   position: relative;
+}
+.carousel-title {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: rgb(255, 255, 255);
+   font-size: 4rem;
+   font-weight: bold;
+   filter: invert(1) brightness(2);
+}
+.carousel-control-prev-icon, .carousel-control-next-icon {
+   filter: invert(1) brightness(2);
+}
+.carousel-indicators{
+   filter: invert(1) brightness(2);
+}
+i{
+   font-size: 2rem;
+   margin: 0 10px;
+}
+i:hover {
+   color: #a5d8ff;
+}
+.social-icons-oscuros a {
+   color: #0024f0;
+   margin-right: 15px;
+   font-size: 1.5rem;
+   transition: color 0.3s;
+}

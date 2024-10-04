@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Formulario</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="texto.html">Texto</a></li>
+                <li><a href="tabla.html">Tabla</a></li>
+                <li><a href="multimedia.html">Multimedia</a></li>
+                <li><a href="formulario.html">Formulario</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Registro de Usuario</h1>
+      <form></form>
+            <fieldset>
+                <legend>Información Personal</legend>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required><br><br>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required><br><br>
+                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br><br>
+                <label>Género:</label><br>
+                <input type="radio" id="masculino" name="genero" value="masculino" required>
+                <label for="masculino">Masculino</label><br>
+                <input type="radio" id="femenino" name="genero" value="femenino" required>
+                <label for="femenino">Femenino</label><br>
+                <input type="radio" id="otro" name="genero" value="otro" required>
+                <label for="otro">Otro</label><br><br>
+            </fieldset>
+            <fieldset>
+                <legend>Información de Contacto</legend>
+                <label for="email">Dirección de Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="telefono">Número de Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" required><br><br>
+                <label for="direccion">Dirección:</label><br>
+                <textarea id="direccion" name="direccion" rows="4" cols="50"></textarea><br><br>
+            </fieldset>
+            <fieldset>
+                <legend>Información de Cuenta</legend>
+                <label for="usuario">Nombre de Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required><br><br>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required><br><br>
+                <label for="confirmar_contrasena">Confirmación de Contraseña:</label>
+                <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required><br><br>
+            </fieldset>
+            <fieldset>
+                <legend>Preferencias</legend>
+                <label for="color_favorito">Seleccionar un Color Favorito:</label>
+                <select id="color_favorito" name="color_favorito">
+                    <option value="rojo">Rojo</option>
+                    <option value="azul">Azul</option>
+                    <option value="verde">Verde</option>
+                    <option value="amarillo">Amarillo</option>
+                </select><br><br>
+                <input type="checkbox" id="terminos" name="terminos" required>
+                <label for="terminos">Aceptar Términos y Condiciones</label><br><br>
+            </fieldset>
+            <input type="submit" value="Registrar">
+        </rm>
+    </main>
+</body>
+</html>
