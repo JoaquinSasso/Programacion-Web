@@ -1,20 +1,22 @@
-.campoNombre, .campoEmail, .campoContraseña, .campoRepetir {
-   display: flex;
-   flex-direction: row;
-   margin: 20px 0px;
+.campoNombre,
+.campoEmail,
+.campoContraseña,
+.campoRepetir {
+	display: flex;
+	flex-direction: row;
+	margin: 20px 0px;
 }
 p {
-   margin: 0px;
-   position: absolute;
-   left: 350px;
+	margin: 0px;
+	position: absolute;
+	left: 350px;
 }
 .advertencia {
-   color: red;
-   margin-left: 10px;
+	color: red;
+	margin-left: 10px;
 }
 input {
-   margin-left: 10px;
-   position: absolute;
-   left: 150px;
-   
+	margin-left: 10px;
+	position: absolute;
+	left: 150px;
 }
