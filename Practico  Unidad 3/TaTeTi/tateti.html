@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>TaTeTi</title>
+   <link rel="stylesheet" href="styles.css">
+   <script src="tateti.js"></script>
+</head>
+<body>
+   <div class="container">
+      <div class="tablero" id="tablero">
+      </div>
+   </div>
+   <div class="botonera">
+      <button id="reiniciar" onclick="crearTablero()">Reiniciar</button>
+      <div id="cantidad">
+         <label for="cantCasillas"><b>Cantidad de casillas ( 3-9 ):</b></label>
+         <input type="number" id="cantCasillas" value="3" min="3" max="9" onblur="crearTablero()">
+
+      </div>
+   </div>
+   <div class="turno">
+      <h2 id="turno">Turno de: O</h2>
+   </div>
+   <script>crearTablero()</script>
+</body>
+</html>
