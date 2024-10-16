@@ -5,19 +5,36 @@ let cantidadCasillas = 3;
 let posX;
 let posY;
 let timeoutId;
+let timeoutIA;
 let modo;
 let jugadas;
-function crearTablero(tipoPartida) {
+
+function inicializarVariables(tipoPartida)
+{
 	victoria = "N";
 	turno = "O";
-   modo = tipoPartida;
-   jugadas = 0;
-   posX = 0
-   posY = 0;
+	modo = tipoPartida;
+	if (modo == 1) {
+		console.log("Modo IA");
+	} else {
+		console.log("Modo 2 jugadores");
+	}
+	jugadas = 0;
+	posX = 0;
+	posY = 0;
 	document.getElementById("turno").innerHTML = "Turno de: O";
 	cantidadCasillas = document.getElementById("cantCasillas").value;
+}
+
+function crearTablero(tipoPartida) {
+	if (tipoPartida == undefined && modo == undefined) {
+		tipoPartida = 0;
+	}
+	else if (tipoPartida == undefined && modo != undefined) {
+		tipoPartida = modo;
+	}
+	inicializarVariables(tipoPartida);
 	var docTablero = document.getElementById("tablero");
-	console.log(cantidadCasillas);
 	tablero = [];
 	docTablero.innerHTML = "";
 	for (var i = 0; i < cantidadCasillas; i++) {
@@ -45,25 +62,31 @@ function crearTablero(tipoPartida) {
 }
 
 function toque(columna, fila) {
+	if (tablero[fila][columna] == 0 && (!timeoutIA)) {
+		if (modo == 1 && turno == "X") {
+		jugadaMaquina(fila, columna);
+		} else {
+		agregarFicha(fila, columna);
+		}	
+	}
+}
+
+function agregarFicha(fila, columna)
+{
 	if (victoria == "N") {
-      if (tablero[fila][columna] == 0) {
-         jugadas++;
-			casilla = document.getElementById("c" + columna + fila);
-			if (turno == "O") {
-				casilla.innerHTML = "O";
-				tablero[fila][columna] = turno;
-				turno = "X";
-			} else {
-				casilla.innerHTML = "X";
-				tablero[fila][columna] = turno;
-				turno = "O";
-			}
-			document.getElementById("turno").innerHTML = "Turno de: " + turno;
-			hayGanador();
-			if (modo == 1 && turno == "X") {
-				jugadaMaquina(fila, columna);
-			}
+		jugadas++;
+		casilla = document.getElementById("c" + columna + fila);
+		if (turno == "O") {
+			casilla.innerHTML = "O";
+			tablero[fila][columna] = turno;
+			turno = "X";
+		} else {
+			casilla.innerHTML = "X";
+			tablero[fila][columna] = turno;
+			turno = "O";
 		}
+		document.getElementById("turno").innerHTML = "Turno de: " + turno;
+		hayGanador();
 	}
 }
 
@@ -74,8 +97,9 @@ function jugadaMaquina(fila, columna) {
 		x = Math.floor(Math.random() * cantidadCasillas);
 		y = Math.floor(Math.random() * cantidadCasillas);
 	}
-	setTimeout(() => {
-		toque(y,x);
+	timeoutIA = setTimeout(() => {
+		agregarFicha(x, y);
+		timeoutIA = false;
 	}, 1000);
 }
 
@@ -101,14 +125,14 @@ function verificarFilas() {
 			if (casilla == "O") {
 				contador++;
 			}
-			if (casilla == "X") {
+			else if (casilla == "X") {
 				contador--;
 			}
 		}
 		if (contador == cantidadCasillas) {
 			victoria = "O";
 		}
-		if (contador == -cantidadCasillas) {
+		else if (contador == -cantidadCasillas) {
 			victoria = "X";
 		}
 	}
@@ -122,14 +146,14 @@ function verificarColumnas() {
 			if (casilla == "O") {
 				contador++;
 			}
-			if (casilla == "X") {
+			else if (casilla == "X") {
 				contador--;
 			}
 		}
 		if (contador == cantidadCasillas) {
 			victoria = "O";
 		}
-		if (contador == -cantidadCasillas) {
+		else if (contador == -cantidadCasillas) {
 			victoria = "X";
 		}
 	}
@@ -144,13 +168,13 @@ function verificarDiagonales() {
 		if (diagonal == "O") {
 			contador++;
 		}
-		if (diagonal == "X") {
+		else if (diagonal == "X") {
 			contador--;
 		}
 		if (antiDiagonal == "O") {
 			contador2++;
 		}
-		if (antiDiagonal == "X") {
+		else if (antiDiagonal == "X") {
 			contador2--;
 		}
 	}
@@ -158,12 +182,15 @@ function verificarDiagonales() {
 	if (contador == cantidadCasillas || contador2 == cantidadCasillas) {
 		victoria = "O";
 	}
-	if (contador == -cantidadCasillas || contador2 == -cantidadCasillas) {
+	else if (contador == -cantidadCasillas || contador2 == -cantidadCasillas) {
 		victoria = "X";
 	}
 }
 
 document.addEventListener("keydown", (event) => {
+	if (event.key === "Enter" || event.key === " " || event.key === "ArrowUp" ||  event.key === "ArrowDown" || event.key === "ArrowLeft" || event.key === "ArrowRight" || event.key === "r") {
+		event.preventDefault();
+	}
 	casilla = document.getElementById("c" + posX + posY);
 	casilla.style.backgroundColor = "white";
 	if (event.key === "ArrowUp") {
@@ -182,7 +209,7 @@ document.addEventListener("keydown", (event) => {
 		if (posX < cantidadCasillas - 1) {
 			posX++;
 		}
-	} else if (event.key === "Enter") {
+	} else if (event.key === " ") { // Barra espaciadora
 		toque(posX, posY);
 	} else if (event.key === "r") {
 		crearTablero(modo);
