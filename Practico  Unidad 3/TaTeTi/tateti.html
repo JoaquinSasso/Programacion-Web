@@ -12,17 +12,26 @@
       <div class="tablero" id="tablero">
       </div>
    </div>
-   <div class="botonera">
-      <button id="reiniciar" onclick="crearTablero()">Reiniciar</button>
-      <div id="cantidad">
-         <label for="cantCasillas"><b>Cantidad de casillas ( 3-9 ):</b></label>
-         <input type="number" id="cantCasillas" value="3" min="3" max="9" onblur="crearTablero()">
-
-      </div>
-   </div>
    <div class="turno">
       <h2 id="turno">Turno de: O</h2>
    </div>
-   <script>crearTablero()</script>
+   <div class="botonera">
+      <button class="reiniciar" onclick="crearTablero(0)">Jugar contra Humano</button>
+      <button class="reiniciar" onclick="crearTablero(1)">Jugar contra IA</button>
+   </div>
+   <div class="cantidad">
+      <label for="cantCasillas"><b>Cantidad de casillas ( 3-9 ):</b></label>
+      <input type="number" id="cantCasillas" value="3" min="3" max="9" onblur="crearTablero()">
+   </div>
+   <div class="controles">
+         <p>Usa las flechas para moverte por el tablero.</p>
+         <p>Presiona Enter para seleccionar una casilla.</p>
+         <p>Presiona R para reiniciar el juego.</p>
+         <p>Luego de 3 segundos las casillas volveran a estar en blanco</p>
+         <p>Cualquier otra tecla iluminara la casilla actual</p>
+   </div>
+   <script>
+      crearTablero()
+   </script>
 </body>
 </html>
