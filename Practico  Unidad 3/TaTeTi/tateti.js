@@ -14,11 +14,6 @@ function inicializarVariables(tipoPartida)
 	victoria = "N";
 	turno = "O";
 	modo = tipoPartida;
-	if (modo == 1) {
-		console.log("Modo IA");
-	} else {
-		console.log("Modo 2 jugadores");
-	}
 	jugadas = 0;
 	posX = 0;
 	posY = 0;
@@ -37,43 +32,41 @@ function crearTablero(tipoPartida) {
 	var docTablero = document.getElementById("tablero");
 	tablero = [];
 	docTablero.innerHTML = "";
-	for (var i = 0; i < cantidadCasillas; i++) {
+	for (let i = 0; i < cantidadCasillas; i++) { //Este for crea las columnas y las añade al tablero
 		tablero[i] = [];
 		let columna = document.createElement("div");
 		columna.className = "columna";
 		columna.id = "col" + i;
 		docTablero.appendChild(columna);
-		for (var j = 0; j < cantidadCasillas; j++) {
+		for (let j = 0; j < cantidadCasillas; j++) { //Este for crea las casillas y las añade a la columna
 			tablero[i][j] = 0;
 			let casilla = document.createElement("div");
 			casilla.className = "casilla";
 			casilla.id = "c" + i + j;
-			casilla.addEventListener(
-				"click",
-				(function (i, j) {
-					return function () {
-						toque(i, j);
-					};
-				})(i, j)
-			);
+			casilla.addEventListener("click", () => toque(i, j));//Se agrega la función toque a cada casilla al hacer click
 			columna.appendChild(casilla);
 		}
 	}
 }
 
-function toque(columna, fila) {
-	if (tablero[fila][columna] == 0 && (!timeoutIA)) {
-		if (modo == 1 && turno == "X") {
-		jugadaMaquina(fila, columna);
-		} else {
+function toque(columna, fila)
+{
+	if (modo == 0) // Modo jugador contra jugador, no hay que esperar
+	{
 		agregarFicha(fila, columna);
-		}	
 	}
+	else if (!timeoutIA) // Modo jugador contra IA, se espera 1 segundo
+	{
+		agregarFicha(fila, columna);
+		jugadaMaquina(fila, columna);
+	}
+	document.getElementById("turno").innerHTML = "Turno de: " + turno;
+	hayGanador();
 }
 
 function agregarFicha(fila, columna)
 {
-	if (victoria == "N") {
+	if (tablero[fila][columna] == 0 && victoria == "N") {
 		jugadas++;
 		casilla = document.getElementById("c" + columna + fila);
 		if (turno == "O") {
@@ -85,8 +78,6 @@ function agregarFicha(fila, columna)
 			tablero[fila][columna] = turno;
 			turno = "O";
 		}
-		document.getElementById("turno").innerHTML = "Turno de: " + turno;
-		hayGanador();
 	}
 }
 
@@ -97,9 +88,10 @@ function jugadaMaquina(fila, columna) {
 		x = Math.floor(Math.random() * cantidadCasillas);
 		y = Math.floor(Math.random() * cantidadCasillas);
 	}
-	timeoutIA = setTimeout(() => {
+	timeoutIA = true; //Se bloque el juego 1 segundo
+	setTimeout(() => {
 		agregarFicha(x, y);
-		timeoutIA = false;
+		timeoutIA = false; //Se desbloquea el juego
 	}, 1000);
 }
 
@@ -118,9 +110,9 @@ function hayGanador() {
 }
 
 function verificarFilas() {
-	for (var i = 0; i < cantidadCasillas; i++) {
+	for (let i = 0; i < cantidadCasillas; i++) {
 		let contador = 0;
-		for (var j = 0; j < cantidadCasillas; j++) {
+		for (let j = 0; j < cantidadCasillas; j++) {
 			casilla = tablero[i][j];
 			if (casilla == "O") {
 				contador++;
@@ -139,9 +131,9 @@ function verificarFilas() {
 }
 
 function verificarColumnas() {
-	for (var i = 0; i < cantidadCasillas; i++) {
+	for (let i = 0; i < cantidadCasillas; i++) {
 		let contador = 0;
-		for (var j = 0; j < cantidadCasillas; j++) {
+		for (let j = 0; j < cantidadCasillas; j++) {
 			casilla = tablero[j][i];
 			if (casilla == "O") {
 				contador++;
@@ -162,7 +154,7 @@ function verificarColumnas() {
 function verificarDiagonales() {
 	let contador = 0;
 	let contador2 = 0;
-	for (var i = 0; i < cantidadCasillas; i++) {
+	for (let i = 0; i < cantidadCasillas; i++) {
 		diagonal = tablero[i][i];
 		antiDiagonal = tablero[i][cantidadCasillas - i - 1];
 		if (diagonal == "O") {
@@ -214,7 +206,7 @@ document.addEventListener("keydown", (event) => {
 	} else if (event.key === "r") {
 		crearTablero(modo);
 	}
-	console.log("posX: " + posX + " posY: " + posY);
+
 	casilla = document.getElementById("c" + posX + posY);
 	casilla.style.backgroundColor = "aquamarine";
 
