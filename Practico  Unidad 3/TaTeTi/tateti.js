@@ -58,10 +58,12 @@ function toque(columna, fila)
 	else if (!timeoutIA) // Modo jugador contra IA, se espera 1 segundo
 	{
 		agregarFicha(fila, columna);
-		jugadaMaquina(fila, columna);
+		if (jugadas < cantidadCasillas * cantidadCasillas) {
+			jugadaMaquina(fila, columna);
+		}
+		document.getElementById("turno").innerHTML = "Turno de: " + turno;
+		hayGanador();
 	}
-	document.getElementById("turno").innerHTML = "Turno de: " + turno;
-	hayGanador();
 }
 
 function agregarFicha(fila, columna)
