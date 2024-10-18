@@ -43,13 +43,13 @@ function crearTablero(tipoPartida) {
 			let casilla = document.createElement("div");
 			casilla.className = "casilla";
 			casilla.id = "c" + i + j;
-			casilla.addEventListener("click", () => toque(i, j));//Se agrega la función toque a cada casilla al hacer click
+			casilla.addEventListener("click", () => toque(j, i));//Se agrega la función toque a cada casilla al hacer click
 			columna.appendChild(casilla);
 		}
 	}
 }
 
-function toque(columna, fila)
+function toque(fila, columna)
 {
 	if (modo == 0) // Modo jugador contra jugador, no hay que esperar
 	{
@@ -59,10 +59,8 @@ function toque(columna, fila)
 	{
 		agregarFicha(fila, columna);
 		if (jugadas < cantidadCasillas * cantidadCasillas) {
-			jugadaMaquina(fila, columna);
+			jugadaMaquina();
 		}
-		document.getElementById("turno").innerHTML = "Turno de: " + turno;
-		hayGanador();
 	}
 }
 
@@ -80,12 +78,13 @@ function agregarFicha(fila, columna)
 			tablero[fila][columna] = turno;
 			turno = "O";
 		}
+		hayGanador();
 	}
 }
 
-function jugadaMaquina(fila, columna) {
-	let x = columna;
-	let y = fila;
+function jugadaMaquina() {
+	let x = Math.floor(Math.random() * cantidadCasillas);
+	let y = Math.floor(Math.random() * cantidadCasillas);
 	while (tablero[x][y] != 0) {
 		x = Math.floor(Math.random() * cantidadCasillas);
 		y = Math.floor(Math.random() * cantidadCasillas);
@@ -108,7 +107,10 @@ function hayGanador() {
    else if (cantidadCasillas * cantidadCasillas == jugadas) {
       document.getElementById("turno").innerHTML = "Empate";
       victoria = "E";
-   }
+	}
+	else {
+		document.getElementById("turno").innerHTML = "Turno de: " + turno;
+	}
 }
 
 function verificarFilas() {
