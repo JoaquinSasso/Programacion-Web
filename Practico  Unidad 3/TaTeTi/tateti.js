@@ -86,7 +86,25 @@ function jugadaMaquina() {
 	filas = verificarFilas();
 	columnas = verificarColumnas();
 	diagonales = verificarDiagonales();
-	if (filas != -1) {
+	if (jugadas == 1 && (tablero[0][0] == "O" || tablero[0][cantidadCasillas - 1] == "O" || tablero[cantidadCasillas - 1][0] == "O" || tablero[cantidadCasillas - 1][cantidadCasillas - 1] == "O")) {
+		if (tablero[0][0] == "O") {
+			x = cantidadCasillas - 1;
+			y = cantidadCasillas - 1;
+		}
+		else if (tablero[0][cantidadCasillas - 1] == "O") {
+			x = cantidadCasillas - 1;
+			y = 0;
+		}
+		else if (tablero[cantidadCasillas - 1][0] == "O") {
+			x = 0;
+			y = cantidadCasillas - 1;
+		}
+		else if (tablero[cantidadCasillas - 1][cantidadCasillas - 1] == "O") {
+			x = 0;
+			y = 0;
+		}
+	}
+	else if (filas != -1) {
 		x = filas;
 		y = Math.floor(Math.random() * cantidadCasillas);
 		while (tablero[x][y] != 0) {
