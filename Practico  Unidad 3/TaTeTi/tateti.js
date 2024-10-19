@@ -83,15 +83,52 @@ function agregarFicha(fila, columna)
 }
 
 function jugadaMaquina() {
-	let x = Math.floor(Math.random() * cantidadCasillas);
-	let y = Math.floor(Math.random() * cantidadCasillas);
-	while (tablero[x][y] != 0) {
+	filas = verificarFilas();
+	columnas = verificarColumnas();
+	diagonales = verificarDiagonales();
+	if (filas != -1) {
+		x = filas;
+		y = Math.floor(Math.random() * cantidadCasillas);
+		while (tablero[x][y] != 0) {
+			y = Math.floor(Math.random() * cantidadCasillas);
+		}
+	}
+	else if (columnas != -1) {
+		y = columnas;
+		x = Math.floor(Math.random() * cantidadCasillas);
+		while (tablero[x][y] != 0) {
+			x = Math.floor(Math.random() * cantidadCasillas);
+		}
+	}
+	else if (diagonales != 0) {
+		if (diagonales == 1) {
+			x = Math.floor(Math.random() * cantidadCasillas);
+			while (tablero[x][x] != 0) {
+				x = Math.floor(Math.random() * cantidadCasillas);
+			}
+			y = x;
+		}
+		if (diagonales == -1) {
+			x = Math.floor(Math.random() * cantidadCasillas);
+			while (tablero[x][cantidadCasillas - x - 1] != 0) {
+				x = Math.floor(Math.random() * cantidadCasillas);
+			}
+			y = cantidadCasillas - x - 1;
+		}
+	}
+	else {
 		x = Math.floor(Math.random() * cantidadCasillas);
 		y = Math.floor(Math.random() * cantidadCasillas);
+		while (tablero[x][y] != 0) {
+			x = Math.floor(Math.random() * cantidadCasillas);
+			y = Math.floor(Math.random() * cantidadCasillas);
+		}
 	}
 	timeoutIA = true; //Se bloque el juego 1 segundo
 	setTimeout(() => {
-		agregarFicha(x, y);
+		if (jugadas > 0) {	
+			agregarFicha(x, y);
+		}
 		timeoutIA = false; //Se desbloquea el juego
 	}, 1000);
 }
@@ -114,6 +151,7 @@ function hayGanador() {
 }
 
 function verificarFilas() {
+	let maximaFila = -1;
 	for (let i = 0; i < cantidadCasillas; i++) {
 		let contador = 0;
 		for (let j = 0; j < cantidadCasillas; j++) {
@@ -125,6 +163,9 @@ function verificarFilas() {
 				contador--;
 			}
 		}
+		if (contador == cantidadCasillas - 1) {
+			maximaFila = i;
+		}
 		if (contador == cantidadCasillas) {
 			victoria = "O";
 		}
@@ -132,9 +173,11 @@ function verificarFilas() {
 			victoria = "X";
 		}
 	}
+	return maximaFila;
 }
 
 function verificarColumnas() {
+	let maximaColumna = -1;
 	for (let i = 0; i < cantidadCasillas; i++) {
 		let contador = 0;
 		for (let j = 0; j < cantidadCasillas; j++) {
@@ -146,6 +189,9 @@ function verificarColumnas() {
 				contador--;
 			}
 		}
+		if (contador == cantidadCasillas - 1) {
+			maximaColumna = i;
+		}
 		if (contador == cantidadCasillas) {
 			victoria = "O";
 		}
@@ -153,11 +199,13 @@ function verificarColumnas() {
 			victoria = "X";
 		}
 	}
+	return maximaColumna;
 }
 
 function verificarDiagonales() {
 	let contador = 0;
 	let contador2 = 0;
+	let contrajugada = 0;
 	for (let i = 0; i < cantidadCasillas; i++) {
 		diagonal = tablero[i][i];
 		antiDiagonal = tablero[i][cantidadCasillas - i - 1];
@@ -174,6 +222,12 @@ function verificarDiagonales() {
 			contador2--;
 		}
 	}
+	if (contador == cantidadCasillas - 1) {
+		contrajugada++;
+	}
+	else if (contador2 == cantidadCasillas - 1) {
+		contrajugada--;
+	}
 
 	if (contador == cantidadCasillas || contador2 == cantidadCasillas) {
 		victoria = "O";
@@ -181,6 +235,7 @@ function verificarDiagonales() {
 	else if (contador == -cantidadCasillas || contador2 == -cantidadCasillas) {
 		victoria = "X";
 	}
+	return contrajugada;
 }
 
 document.addEventListener("keydown", (event) => {
