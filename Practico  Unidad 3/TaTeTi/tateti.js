@@ -206,7 +206,7 @@ document.addEventListener("keydown", (event) => {
 			posX++;
 		}
 	} else if (event.key === " ") { // Barra espaciadora
-		toque(posX, posY);
+		toque(posY, posX);
 	} else if (event.key === "r") {
 		crearTablero(modo);
 	}
