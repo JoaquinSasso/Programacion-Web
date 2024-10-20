@@ -87,22 +87,12 @@ function jugadaMaquina() {
 	columnas = verificarColumnas();
 	diagonales = verificarDiagonales();
 	if (jugadas == 1 && (tablero[0][0] == "O" || tablero[0][cantidadCasillas - 1] == "O" || tablero[cantidadCasillas - 1][0] == "O" || tablero[cantidadCasillas - 1][cantidadCasillas - 1] == "O")) {
-		if (tablero[0][0] == "O") {
-			x = cantidadCasillas - 1;
-			y = cantidadCasillas - 1;
-		}
-		else if (tablero[0][cantidadCasillas - 1] == "O") {
-			x = cantidadCasillas - 1;
-			y = 0;
-		}
-		else if (tablero[cantidadCasillas - 1][0] == "O") {
-			x = 0;
-			y = cantidadCasillas - 1;
-		}
-		else if (tablero[cantidadCasillas - 1][cantidadCasillas - 1] == "O") {
-			x = 0;
-			y = 0;
-		}
+		x = Math.floor(cantidadCasillas / 2);
+		y = Math.floor(cantidadCasillas / 2);
+	}
+	else if (jugadas == 3 && tablero[Math.floor(cantidadCasillas / 2)][Math.floor(cantidadCasillas / 2)] == "X") {
+		x = Math.floor(cantidadCasillas / 2) - 1;
+		y = Math.floor(cantidadCasillas / 2);
 	}
 	else if (filas != -1) {
 		x = filas;
