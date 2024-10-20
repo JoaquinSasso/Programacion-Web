@@ -171,7 +171,7 @@ function verificarFilas() {
 				contador--;
 			}
 		}
-		if (contador == cantidadCasillas - 1) {
+		if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1) {
 			maximaFila = i;
 		}
 		if (contador == cantidadCasillas) {
@@ -197,7 +197,7 @@ function verificarColumnas() {
 				contador--;
 			}
 		}
-		if (contador == cantidadCasillas - 1) {
+		if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1) {
 			maximaColumna = i;
 		}
 		if (contador == cantidadCasillas) {
@@ -230,10 +230,10 @@ function verificarDiagonales() {
 			contador2--;
 		}
 	}
-	if (contador == cantidadCasillas - 1) {
+	if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1) {
 		contrajugada++;
 	}
-	else if (contador2 == cantidadCasillas - 1) {
+	else if (contador2 == cantidadCasillas - 1 || contador2 == -cantidadCasillas + 1) {
 		contrajugada--;
 	}
 
