@@ -90,10 +90,6 @@ function jugadaMaquina() {
 		x = Math.floor(cantidadCasillas / 2);
 		y = Math.floor(cantidadCasillas / 2);
 	}
-	else if (jugadas == 3 && tablero[Math.floor(cantidadCasillas / 2)][Math.floor(cantidadCasillas / 2)] == "X") {
-		x = Math.floor(cantidadCasillas / 2) - 1;
-		y = Math.floor(cantidadCasillas / 2);
-	}
 	else if (filas != -1) {
 		x = filas;
 		y = Math.floor(Math.random() * cantidadCasillas);
@@ -123,6 +119,10 @@ function jugadaMaquina() {
 			}
 			y = cantidadCasillas - x - 1;
 		}
+	}
+	else if (jugadas == 3 && tablero[Math.floor(cantidadCasillas / 2)][Math.floor(cantidadCasillas / 2)] == "X") {
+		x = Math.floor(cantidadCasillas / 2) - 1;
+		y = Math.floor(cantidadCasillas / 2);
 	}
 	else {
 		x = Math.floor(Math.random() * cantidadCasillas);
