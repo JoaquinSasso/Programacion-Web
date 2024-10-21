@@ -59,7 +59,7 @@ function toque(fila, columna)
 	{
 		agregarFicha(fila, columna);
 		if (jugadas < cantidadCasillas * cantidadCasillas) {
-			jugadaMaquina();
+			jugadaMaquina(fila, columna);
 		}
 	}
 }
@@ -82,7 +82,7 @@ function agregarFicha(fila, columna)
 	}
 }
 
-function jugadaMaquina() {
+function jugadaMaquina(filaPlayer, columnaPlayer) {
 	filas = verificarFilas();
 	columnas = verificarColumnas();
 	diagonales = verificarDiagonales();
@@ -92,30 +92,30 @@ function jugadaMaquina() {
 	}
 	else if (filas != -1) {
 		x = filas;
-		y = Math.floor(Math.random() * cantidadCasillas);
+		y = 0;
 		while (tablero[x][y] != 0) {
-			y = Math.floor(Math.random() * cantidadCasillas);
+			y++;
 		}
 	}
 	else if (columnas != -1) {
 		y = columnas;
-		x = Math.floor(Math.random() * cantidadCasillas);
+		x = 0;
 		while (tablero[x][y] != 0) {
-			x = Math.floor(Math.random() * cantidadCasillas);
+			x++;
 		}
 	}
 	else if (diagonales != 0) {
 		if (diagonales == 1) {
-			x = Math.floor(Math.random() * cantidadCasillas);
+			x = 0;
 			while (tablero[x][x] != 0) {
-				x = Math.floor(Math.random() * cantidadCasillas);
+				x++;
 			}
 			y = x;
 		}
 		if (diagonales == -1) {
-			x = Math.floor(Math.random() * cantidadCasillas);
+			x = cantidadCasillas - 1;
 			while (tablero[x][cantidadCasillas - x - 1] != 0) {
-				x = Math.floor(Math.random() * cantidadCasillas);
+				x--;
 			}
 			y = cantidadCasillas - x - 1;
 		}
@@ -125,13 +125,23 @@ function jugadaMaquina() {
 		y = Math.floor(cantidadCasillas / 2);
 	}
 	else {
-		x = Math.floor(Math.random() * cantidadCasillas);
-		y = Math.floor(Math.random() * cantidadCasillas);
-		while (tablero[x][y] != 0) {
-			x = Math.floor(Math.random() * cantidadCasillas);
+		opcion = Math.floor(Math.random * 10)
+		if (opcion > 5) {
+			x = filaPlayer;
 			y = Math.floor(Math.random() * cantidadCasillas);
+			while (tablero[x][y] != 0) {
+				y = Math.floor(Math.random() * cantidadCasillas);
+			}
 		}
+		else
+			{
+				y = columnaPlayer;
+				x = Math.floor(Math.random() * cantidadCasillas);
+				while (tablero[x][y] != 0) {
+					x = Math.floor(Math.random() * cantidadCasillas);
+				}
 	}
+}
 	timeoutIA = true; //Se bloque el juego 1 segundo
 	setTimeout(() => {
 		if (jugadas > 0) {	
