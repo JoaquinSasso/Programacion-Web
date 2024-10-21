@@ -124,6 +124,16 @@ function jugadaMaquina(filaPlayer, columnaPlayer) {
 		x = Math.floor(cantidadCasillas / 2) - 1;
 		y = Math.floor(cantidadCasillas / 2);
 	}
+	else if (cantidadCasillas == 3 && jugadas == 1 && tablero[1][1] == "O")
+	{
+		x = 0
+		y = 0
+	}
+	else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "O" && tablero[2][2] == "O")
+	{
+		x = 2;
+		y = 0;
+	}
 	else {
 		opcion = Math.floor(Math.random * 10)
 		if (opcion > 5) {
