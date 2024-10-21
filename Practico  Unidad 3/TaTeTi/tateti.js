@@ -54,12 +54,15 @@ function toque(fila, columna)
 	if (modo == 0) // Modo jugador contra jugador, no hay que esperar
 	{
 		agregarFicha(fila, columna);
+		jugadas++;
 	}
 	else if (!timeoutIA) // Modo jugador contra IA, se espera 1 segundo
 	{
 		agregarFicha(fila, columna);
+		jugadas++;
 		if (jugadas < cantidadCasillas * cantidadCasillas) {
 			jugadaMaquina(fila, columna);
+			jugadas++;
 		}
 	}
 }
@@ -67,14 +70,13 @@ function toque(fila, columna)
 function agregarFicha(fila, columna)
 {
 	if (tablero[fila][columna] == 0 && victoria == "N") {
-		jugadas++;
+
 		casilla = document.getElementById("c" + columna + fila);
-		if (turno == "O") {
-			casilla.innerHTML = "O";
+		casilla.innerHTML = turno;
+		if (turno == "O") {	
 			tablero[fila][columna] = turno;
 			turno = "X";
 		} else {
-			casilla.innerHTML = "X";
 			tablero[fila][columna] = turno;
 			turno = "O";
 		}
@@ -83,28 +85,32 @@ function agregarFicha(fila, columna)
 }
 
 function jugadaMaquina(filaPlayer, columnaPlayer) {
-	filas = verificarFilas();
-	columnas = verificarColumnas();
-	diagonales = verificarDiagonales();
+	filas = verificarFilas() % cantidadCasillas;
+	columnas = verificarColumnas() % cantidadCasillas;
+	diagonales = verificarDiagonales() % cantidadCasillas;
 	if (cantidadCasillas == 3 && jugadas == 1 && (tablero[0][0] == "O" || tablero[0][cantidadCasillas - 1] == "O" || tablero[cantidadCasillas - 1][0] == "O" || tablero[cantidadCasillas - 1][cantidadCasillas - 1] == "O")) {
 		x = Math.floor(1);
 		y = Math.floor(1);
 	}
-	else if (filas != -1) {
+	else if (cantidadCasillas == 3 && jugadas == 1 && tablero[1][1] == "O") {
+		x = 0;
+		y = 0;
+	} else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "O" && tablero[2][2] == "O") {
+		x = 2;
+		y = 0;
+	} else if (filas != -1) {
 		x = filas;
 		y = 0;
 		while (tablero[x][y] != 0) {
 			y++;
 		}
-	}
-	else if (columnas != -1) {
+	} else if (columnas != -1) {
 		y = columnas;
 		x = 0;
 		while (tablero[x][y] != 0) {
 			x++;
 		}
-	}
-	else if (diagonales != 0) {
+	} else if (diagonales != 0) {
 		if (diagonales == 1) {
 			x = 0;
 			while (tablero[x][x] != 0) {
@@ -119,46 +125,41 @@ function jugadaMaquina(filaPlayer, columnaPlayer) {
 			}
 			y = cantidadCasillas - x - 1;
 		}
-	}
-	else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "X") {
+	} else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "X") {
 		x = Math.floor(cantidadCasillas / 2) - 1;
 		y = Math.floor(cantidadCasillas / 2);
-	}
-	else if (cantidadCasillas == 3 && jugadas == 1 && tablero[1][1] == "O")
-	{
-		x = 0
-		y = 0
-	}
-	else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "O" && tablero[2][2] == "O")
-	{
-		x = 2;
-		y = 0;
-	}
-	else {
-		opcion = Math.floor(Math.random * 10)
+	} else {
+		opcion = Math.floor(Math.random() * 10);
 		if (opcion > 5) {
 			x = filaPlayer;
-			y = Math.floor(Math.random() * cantidadCasillas);
+			y = 0;
 			while (tablero[x][y] != 0) {
-				y = Math.floor(Math.random() * cantidadCasillas);
+				y++;
+				if (y == cantidadCasillas) {
+					y = Math.floor(Math.random() * cantidadCasillas);
+					x = 0;
+				}
+			}
+		} else {
+			y = columnaPlayer;
+			x = 0;
+			while (tablero[x][y] != 0) {
+				x++;
+				if (x == cantidadCasillas) {
+					x = Math.floor(Math.random() * cantidadCasillas);
+					y = 0;
+				}
 			}
 		}
-		else
-			{
-				y = columnaPlayer;
-				x = Math.floor(Math.random() * cantidadCasillas);
-				while (tablero[x][y] != 0) {
-					x = Math.floor(Math.random() * cantidadCasillas);
-				}
 	}
-}
-	timeoutIA = true; //Se bloque el juego 1 segundo
+
+	timeoutIA = true; // Se bloquea el juego 1 segundo
 	setTimeout(() => {
-		if (jugadas > 0) {	
+		if (jugadas > 0) {
 			agregarFicha(x, y);
 		}
-		timeoutIA = false; //Se desbloquea el juego
-	}, 1000);
+		timeoutIA = false; // Se desbloquea el juego
+	}, 1000); // Añadido el tiempo de espera de 1 segundo
 }
 
 function hayGanador() {
@@ -191,8 +192,15 @@ function verificarFilas() {
 				contador--;
 			}
 		}
-		if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1) {
-			maximaFila = i;
+		if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1)
+		{
+			if (contador > maximaFila) {
+				maximaFila = i;
+			}
+			if (tablero[i][0] == "X" || tablero[i][1] == "X") {
+				maximaFila = i + cantidadCasillas;
+			}
+		
 		}
 		if (contador == cantidadCasillas) {
 			victoria = "O";
@@ -218,7 +226,13 @@ function verificarColumnas() {
 			}
 		}
 		if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1) {
+			if (contador > maximaColumna) {
+				maximaColumna = i;
+			}
 			maximaColumna = i;
+			if (tablero[0][i] == "X" || tablero[1][i] == "X") {
+				maximaColumna = i + cantidadCasillas;
+			}
 		}
 		if (contador == cantidadCasillas) {
 			victoria = "O";
@@ -250,11 +264,18 @@ function verificarDiagonales() {
 			contador2--;
 		}
 	}
+
 	if (contador == cantidadCasillas - 1 || contador == -cantidadCasillas + 1) {
-		contrajugada++;
+		contrajugada = 1;
+		if (tablero[0][0] == "X" || tablero[cantidadCasillas - 1][cantidadCasillas - 1] == "X") {
+			contrajugada = cantidadCasillas;
+		}
 	}
 	else if (contador2 == cantidadCasillas - 1 || contador2 == -cantidadCasillas + 1) {
-		contrajugada--;
+		contrajugada = - 1;
+		if (tablero[0][cantidadCasillas - 1] == "X" || tablero[cantidadCasillas - 1][0] == "X") {
+			contrajugada = -cantidadCasillas;
+		}
 	}
 
 	if (contador == cantidadCasillas || contador2 == cantidadCasillas) {
