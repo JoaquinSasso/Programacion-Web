@@ -42,7 +42,7 @@ function crearTablero(tipoPartida) {
 			tablero[i][j] = 0;
 			let casilla = document.createElement("div");
 			casilla.className = "casilla";
-			casilla.id = "c" + i + j;
+			casilla.id = "c" + j + i;
 			casilla.addEventListener("click", () => toque(j, i));//Se agrega la función toque a cada casilla al hacer click
 			columna.appendChild(casilla);
 		}
@@ -69,7 +69,7 @@ function agregarFicha(fila, columna)
 {
 	if (tablero[fila][columna] == 0 && victoria == "N") {
 		jugadas++;
-		casilla = document.getElementById("c" + columna + fila);
+		casilla = document.getElementById("c" + fila + columna);
 		casilla.innerHTML = turno;
 		if (turno == "O") {	
 			tablero[fila][columna] = turno;
@@ -129,9 +129,23 @@ function jugadaMaquina(filaPlayer, columnaPlayer) {
 			y = cantidadCasillas - x - 1;
 		}
 	} else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "X") {
-		x = Math.floor(cantidadCasillas / 2) - 1;
-		y = Math.floor(cantidadCasillas / 2);
-	} else {
+		if (tablero[0][1] == 0)
+		{	
+			x = 0;
+			y = 1;
+		}
+		else if (tablero[2][1] == 0)
+		{
+			x = 2;
+			y = 1;
+		}
+		else
+		{
+			x = 1;
+			y = 0;
+		}
+	}
+	 else {
 		opcion = Math.floor(Math.random() * 10);
 		if (opcion > 5) {
 			x = filaPlayer;
@@ -180,8 +194,6 @@ function hayGanador() {
 	else {
 		document.getElementById("turno").innerHTML = "Turno de: " + turno;
 	}
-	console.log("Jugadas: " + jugadas);
-	console.log("Victoria: " + victoria);
 }
 
 function verificarFilas() {
@@ -234,7 +246,6 @@ function verificarColumnas() {
 			if (contador > maximaColumna) {
 				maximaColumna = i;
 			}
-			maximaColumna = i;
 			if (tablero[0][i] == "X" || tablero[1][i] == "X") {
 				maximaColumna = i + cantidadCasillas;
 			}
