@@ -54,23 +54,21 @@ function toque(fila, columna)
 	if (modo == 0) // Modo jugador contra jugador, no hay que esperar
 	{
 		agregarFicha(fila, columna);
-		jugadas++;
 	}
 	else if (!timeoutIA) // Modo jugador contra IA, se espera 1 segundo
 	{
 		agregarFicha(fila, columna);
-		jugadas++;
 		if (jugadas < cantidadCasillas * cantidadCasillas) {
 			jugadaMaquina(fila, columna);
-			jugadas++;
 		}
 	}
+	hayGanador();
 }
 
 function agregarFicha(fila, columna)
 {
 	if (tablero[fila][columna] == 0 && victoria == "N") {
-
+		jugadas++;
 		casilla = document.getElementById("c" + columna + fila);
 		casilla.innerHTML = turno;
 		if (turno == "O") {	
@@ -95,7 +93,12 @@ function jugadaMaquina(filaPlayer, columnaPlayer) {
 	else if (cantidadCasillas == 3 && jugadas == 1 && tablero[1][1] == "O") {
 		x = 0;
 		y = 0;
-	} else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "O" && tablero[2][2] == "O") {
+	}
+	else if (cantidadCasillas == 3 && jugadas == 1 && tablero[1][1] == 0) {
+		x = 1;
+		y = 1;
+	}
+	else if (cantidadCasillas == 3 && jugadas == 3 && tablero[1][1] == "O" && tablero[2][2] == "O") {
 		x = 2;
 		y = 0;
 	} else if (filas != -1) {
@@ -170,13 +173,15 @@ function hayGanador() {
       document.getElementById("turno").innerHTML =
          "El jugador " + victoria + " ha ganado la partida";
    }
-   else if (cantidadCasillas * cantidadCasillas == jugadas) {
+   else if (cantidadCasillas * cantidadCasillas <= jugadas) {
       document.getElementById("turno").innerHTML = "Empate";
       victoria = "E";
 	}
 	else {
 		document.getElementById("turno").innerHTML = "Turno de: " + turno;
 	}
+	console.log("Jugadas: " + jugadas);
+	console.log("Victoria: " + victoria);
 }
 
 function verificarFilas() {
