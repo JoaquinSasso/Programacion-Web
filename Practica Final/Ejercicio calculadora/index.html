@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+   <head lang="es">
+      <title>Calculadora</title>
+      <link rel="stylesheet" href="styles.css">
+      <script src="script.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <div class="pantalla">
+            <span id="display"></span>
+         </div>
+         <div class="botones">
+            <div id="num9"><button onclick="agregar(9)">9</button></div>
+            <div id="num8"><button onclick="agregar(8)">8</button></div>
+            <div id="num7"><button onclick="agregar(7)">7</button></div>
+            <div id="dividir"><button onclick="agregar('/')">/</button></div>
+            <div id="num6"><button onclick="agregar(6)">6</button></div>
+            <div id="num5"><button onclick="agregar(5)">5</button></div>
+            <div id="num4"><button onclick="agregar(4)">4</button></div>
+            <div id="multiplicar"><button onclick="agregar('*')">*</button></div>
+            <div id="num3"><button onclick="agregar(3)">3</button></div>
+            <div id="num2"><button onclick="agregar(2)">2</button></div>
+            <div id="num1"><button onclick="agregar(1)">1</button></div>
+            <div id="sumar"><button onclick="agregar('+')">+</button></div>
+            <div id="num0"><button onclick="agregar(0)">0</button></div>
+            <div id="borrar"><button onclick="borrar()">C</button></div>
+            <div id="restar"><button onclick="agregar('-')">-</button></div>
+            <div id="calcular"><button onclick="calcular()">=</button></div>
+         </div>
+      </div>
+   </body>
+</html>

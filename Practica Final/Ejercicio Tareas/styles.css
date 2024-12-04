@@ -1,0 +1,62 @@
+.container
+{
+   margin: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 800px;
+}
+h1
+{
+   font-family: Roboto;
+}
+button{
+   padding: 3px;
+   border-radius: 6px;
+   border: 2px solid black;
+}
+label{
+   font-size: 18px;
+}
+.datos
+{
+   padding: 30px;
+   border: 3px solid gray;
+   border-radius: 20px;
+   box-shadow: 5px 5px 10px rgba(0,0,0,0.1);
+   margin-bottom: 20px;
+   max-width: 800px;
+   user-select: none;
+}
+.todo
+{
+   margin: 5px 5px 0px;
+   padding: 10px;
+   border-radius: 10px;
+   background-color: rgba(255, 118, 118, 0.5);
+   min-width: 450px;
+   word-wrap: break-word;
+   user-select: none;
+}
+.done
+{
+   user-select: none;
+   margin: 5px 5px 0px;
+   padding: 10px;
+   border-radius: 10px;
+   background-color: rgba(80, 249, 58, 0.5);
+   min-width: 450px;
+   word-wrap: break-word;
+   text-decoration: line-through;
+}
+.tareas
+{
+   max-width: 450px;
+}
+li{
+   list-style: none;
+}
+ul
+{
+   padding-left : 0px;
+}

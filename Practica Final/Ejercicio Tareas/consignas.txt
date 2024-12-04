@@ -1,0 +1,16 @@
+Objetivo
+   Crear una página web que permita al usuario añadir tareas a una lista y marcarlas como completadas.
+Requisitos
+HTML:
+   Un título para la página.
+   Un campo de entrada (input) para que el usuario escriba una nueva tarea.
+   Un botón para añadir la tarea a la lista.
+   Una lista (ul) donde se mostrarán las tareas añadidas.
+CSS:
+   Estilizar la página para que se vea atractiva.
+   Usar colores y márgenes para mejorar la legibilidad.
+   Cambiar el estilo de las tareas completadas (por ejemplo, tacharlas).
+JavaScript:
+   Capturar el evento del botón para añadir la tarea a la lista.
+   Permitir que al hacer clic en una tarea, esta se marque como completada (cambiando su estilo).
+   Limpiar el campo de entrada después de añadir una tarea.

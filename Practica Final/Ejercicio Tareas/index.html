@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+   <head>
+      <title>Organizador de tareas</title>
+      <link  rel="stylesheet" href="styles.css">
+      <script src="script.js"></script>
+   </head>
+   <body>
+      <div class="container">
+         <h1>Organizador de tareas</h1>
+         <div class="datos">
+            <label for="tarea">Ingrese la tarea: </label>
+            <input type = "text" name="tarea" id="tarea" autocomplete="off">
+            <button onclick="agregar()">Agregar Tarea</button>
+         </div>
+         <div class="tareas">
+            <ul id="lista">
+               <li id="emptyList"><div class="todo">Todavía no hay tareas</div></li>
+            </ul>
+         </div>
+      </div>
+   </body>
+</html>
